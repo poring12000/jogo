@@ -1,4 +1,6 @@
-var x, y, a, b, q, er, ar;
+var x, y, a, b, q, er, ar, xo, yo;
+xo=1
+yo=200
 ar = 0
 er = 0
 q = 200
@@ -7,59 +9,67 @@ y = 370
 a = 50
 b = 50
 function setup() {
- createCanvas(400, 400);
+createCanvas(400, 400);
 }
 function keyTyped() {
-  if(key === 'z'){
-  x=200
-  }
- if(key === 'q'){
- q = q +100;
+ if(key === 'z'){
+ x=200
  }
- if(key === 'w'){
- q = q -100;
- }
+if(key === 'q'){
+q = q +100;
+}
+if(key === 'w'){
+q = q -100;
+}
 }
 function draw() {
- if (keyIsPressed === true) {
- fill(0);
- } else {
- fill(255);
- }
- rect(1, 1, 1, 1);
- if(keyIsDown(RIGHT_ARROW)){
- x= x + 2;
+if (keyIsPressed === true) {
+fill(0);
+} else {
+fill(255);
 }
- if(keyIsDown(LEFT_ARROW)){
- x = x - 2;
+rect(1, 1, 1, 1);
+if(keyIsDown(RIGHT_ARROW)){
+x= x + 2;
 }
- if(keyIsDown(UP_ARROW)){
- y= y - 2;
+if(keyIsDown(LEFT_ARROW)){
+x = x - 2;
 }
- if(keyIsDown(DOWN_ARROW)){
- y= y + 2;
+if(keyIsDown(UP_ARROW)){
+y= y - 2;
+}
+if(keyIsDown(DOWN_ARROW)){
+y= y + 2;
 }
 if(keyIsDown(RIGHT_ARROW)){
- a = a +1
+a = a +1
 if(a>=50){
-  ar=0
+ ar=0
 while(ar<101){
 a=a-1
 ar++
-}  
+}
 }
 }
 if(keyIsDown(LEFT_ARROW)){
- a = a -1
+a = a -1
 if(a<=-50){
-  er=0
+ er=0
 while(er<101){
 a=a+1
 er++
-}  
 }
 }
- background(q);
- ellipse(x, y, a, b)
- square(150, 40, 50);
+}
+background(q);
+ellipse(x, y, a, b)
+rect(xo,yo,40,40)
+  if(xo>450){
+  xo = random(0,-10)
+  }
+  xo=xo+ random(10)
+  if(yo>450){
+  yo=random(0,-100)
+  }
+  yo= yo+random(10)
 }
