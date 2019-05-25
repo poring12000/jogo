@@ -1,45 +1,49 @@
-var x, y, a, b, q, er, ar, xo, yo;
-xo=1
-yo=200
-ar = 0
-er = 0
-q = 200
-x = 200
-y = 370
-a = 50
-b = 50
+var bp=1000
+var obj=10
+var yy=[]
+var xx=[]
+var x=100;
+var y=400;
+var xd=0
+var yd=0
+var a =50;
+var b =50;
+var vidas= 3
+var pontos = 0
+var dificuldade = 1
+
+var estadoDisparo = false
+
 function setup() {
-createCanvas(400, 400);
+  createCanvas(500, 500);
+for(var i=0; i<obj; i++){
+ xx[i]=random(0,500)
+ yy[i]=random(0,500)
+  }
 }
-function keyTyped() {
- if(key === 'z'){
- x=200
- }
-if(key === 'q'){
-q = q +100;
-}
-if(key === 'w'){
-q = q -100;
-}
-}
+
 function draw() {
-if (keyIsPressed === true) {
-fill(0);
-} else {
-fill(255);
-}
-rect(1, 1, 1, 1);
-if(keyIsDown(RIGHT_ARROW)){
-x= x + 2;
+  if(pontos > bp){
+  dificuldade++
+    bp=bp+1000
+  }
+  background(220);
+  textSize(18)
+  text('Vidas: ' +vidas, 10, 30)
+  text('Pontos: '+ pontos, 175,30)
+  text('Dificuldade: '+dificuldade, 350,30)
+
+  if(keyIsDown(RIGHT_ARROW)){
+x= x + 10
 }
 if(keyIsDown(LEFT_ARROW)){
-x = x - 2;
+x = x - 10
 }
 if(keyIsDown(UP_ARROW)){
-y= y - 2;
+y= y - 10
 }
 if(keyIsDown(DOWN_ARROW)){
-y= y + 2;
+y= y + 10
 }
 if(keyIsDown(RIGHT_ARROW)){
 a = a +1
@@ -61,15 +65,59 @@ er++
 }
 }
 }
-background(q);
-ellipse(x, y, a, b)
-rect(xo,yo,40,40)
-  if(xo>450){
-  xo = random(0,-10)
+  fill(280)
+  ellipse(x,y,a,b);
+  if(x>500){
+  x=0
   }
-  xo=xo+ random(10)
-  if(yo>450){
-  yo=random(0,-100)
+  if(y>500){
+  y=0
   }
-  yo= yo+random(10)
+  if(x<0){
+    x=500
+  }
+  if(y<0){
+    y=500
+  }
+  if(keyIsDown(CONTROL) && estadoDisparo== false){
+     xd=x
+     yd=y
+  estadoDisparo = true
 }
+  if(estadoDisparo){
+ellipse(xd,yd,4,4)
+    yd=yd-5
+    if(yd<0){
+    estadoDisparo = false
+    }
+  }
+  for(i=0; i<obj;i++){
+  if(dist(xd,yd, xx[i],yy[i]) <40)
+  pontos = pontos+100
+  }
+   for(i=0; i<obj; i++){ 
+  fill(0)
+ellipse(xx[i],yy[i],50,50)
+  if(xx[i]>x){
+    xx[i]=xx[i] -1
+  }
+  if(xx[i]<x){
+    xx[i]=xx[i] +1
+  }
+  if(yy[i]>y){
+  yy[i]=yy[i] -1
+  }
+  if(yy[i]<y){
+  yy[i]=yy[i] +1
+  }
+  }
+  for(i=0; i<obj; i++){ 
+  if( dist(x,y,xx[i],yy[i])< 40){
+  vidas=vidas - 1
+    x=250
+    y=250
+    xx[i]=0
+    yy[i]=0
+  }
+  }
+  }
